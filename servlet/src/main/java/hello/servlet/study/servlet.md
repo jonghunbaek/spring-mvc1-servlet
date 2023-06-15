@@ -5,10 +5,10 @@
 
 @WebServlet(name = "", urlPatterns = "") : @ServletComponetScan의 대상이 되기 위한 어노테이션이며, 해당 어노테이션을 사용하는 클래스는 HttpServlet을 상속 받야 한다. ->요청마다 service()를 호출하기 위해
 
-##### HTTP 메시지 바디에 내용 저장
+#### HTTP 메시지 바디에 내용 저장
 response.getWriter().write("hello " + username);
 
-##### http 요청 메시지 로그 확인 방법 
+#### http 요청 메시지 로그 확인 방법 
 logging.level.org.apache.coyote.http11=debug
 
 + 매 요청마다 실행하면 성능저하 발생 가능성이 높아짐
@@ -25,7 +25,7 @@ logging.level.org.apache.coyote.http11=debug
 ### HttpServletRequest 개요
 + HTTP요청 메시지를 편리하게 사용할 수 있도록 개발자 대신에 요청 메시지를 파싱하고 그 결과를 HttpServletRequest객체에 담아서 제공
 + 임시 저장소 기능(setAttribute(), getAttribute()), 세션관리 기능(getSession())
-+ HttpServletRequest는 응답 메시지를 편리하게 사용하도록 도와주는 객체다. 즉, http메시지 자체와, 스펙, 특성등에 대한 이해가 선행되어야 한다.-> 굵은 글씨체로
++ **HttpServletRequest는 응답 메시지를 편리하게 사용하도록 도와주는 객체다. 즉, http메시지 자체와, 스펙, 특성등에 대한 이해가 선행되어야 한다.**
 + http 요청 메시지 이미지 예시 첨부
 
 
@@ -34,3 +34,18 @@ logging.level.org.apache.coyote.http11=debug
 + getLocales() -> 운선순위가 높은 순으로 모든 Accept-Language를 가져옴
 + getLocale() -> 가장 운선순위가 높은 Accept-Language를 가져옴
 + getContentType(), getContentLength(), getCharacterEncoding() 등
+
+### HTTP 요청 데이터
+#### GET(쿼리 파라미터) 방식 
++ 메시지 바디없이 url의 쿼리스트링으로 데이터를 전달(검색, 필터, 페이징 등)
++ getParameterValues() - 파라미터 이름이 하나고 값이 여러개인 경우에 사용
++ getParameterNames() - 파라미터 이름 전체 조회
+
+#### POST(html form) 방식 
++ 메시지 바디에 데이터를 포함해서 전달, 데이터 형식의 정의 때문에 content-type을 꼭 지정해줘야 한다.
++ application/x-www-form-urlencoded -> 쿼리스트링 형식과 같음. 즉, GET방식과 같은 방법으로 데이터를 조회할 수 있다.(getParameter())
++ 클라이언트측에선 두 방식에 차이가 있지만, 서버 입장에선 동일
+
+#### HTTP message body 
++ 메시지 바디에 데이터를 직접 담아서 요청, HTTP API에서 주로 사용(JSON, XML, TEXT), POST,PUT,PATCH
+
