@@ -51,3 +51,15 @@ logging.level.org.apache.coyote.http11=debug
 + getInputStream() - 메시지 내용을 바이트 코드로 얻을 수 있다.
 + json결과를 파싱해 자바 객체로 변환하기 위해선 Jackson, Gson과 같은 라이브러리를 활용해야한다.(Jackson-ObjectMapper(스프링부트 기본 내장))
 
+### 6. HTTP 응답 데이터
+#### 6.1 HttpServletResponse (HTTP 응답코드 설정, 헤더 및 바디 생성)
++ 응답데이터는 [start-line] - [response-headers] - [message-body]로 구성
++ setStatus() - 상태 설정
++ HttpServletResponse.SC_OK - 200 상태를 직접 내려주기 보단 변수를 사용하는것이 바람직
++ 캐시 무효화 방법
++ resp.setHeader("Cach-Control", "no-cache, no-store, must-revalidate");
++ resp.setHeader("Pragma", "no-cache");
++ header관련 간편한 메서드 - setContentType(), setCharacterEncoding()등
++ Cookie 객체를 활용한 쿠키 설정 - new Cookie("myCookie", "good"),setMaxAge(), response.addCookie() - 마지막에 addCookie를 해줘야 응답헤더에 쿠키정보가 설정된다.
++ redircet - sendRedirect()
+
