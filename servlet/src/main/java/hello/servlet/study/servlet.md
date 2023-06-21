@@ -63,3 +63,8 @@ logging.level.org.apache.coyote.http11=debug
 + Cookie 객체를 활용한 쿠키 설정 - new Cookie("myCookie", "good"),setMaxAge(), response.addCookie() - 마지막에 addCookie를 해줘야 응답헤더에 쿠키정보가 설정된다.
 + redircet - sendRedirect()
 
+#### 6.2 HTTP 응답 데이터 - 단순 텍스트, HTML
++ html 반환시 content-type을 text/html로 지정
++ writer.println()에 내용을 넣어서 응답 데이터를 보냄 - html.
++ objectMapper.writeValueAsString()를 활용해 객체를 문자로 변경해줌 - json
+
