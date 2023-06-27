@@ -18,8 +18,6 @@
 + 리다이렉트와 forward의 차이 - 클라이언트의 인지 유무 차이(리다이렉트는 인지, 포워드는 미인지)
 + 한계점 - 중복되는 코드, 공통처리가 어렵다(컨트롤러들의 컨트롤이 필요함, 현재는 요청이 막 들어옴-스프링 mvc의 핵심)
 
-
-
 # TIP
 + HashMap()은 동시성 이슈가 해결아 안되기 때문에 ConcurrentHashMap, AtomicLong을 실무에서 사용
 + Test case작성 중 assertThat().contains() - 해당 항목들이 존재하는지 확인
