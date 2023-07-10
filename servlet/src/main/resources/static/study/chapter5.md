@@ -4,7 +4,6 @@
 + DispacherServlet은 스프링부트에서 서블릿으로 자동등록되고 모든 경로에 대해 매핑한다.
 + FrameworkServlet에서 service()가 실행되면 DispacherServlet에 있는 doDispatch()가 실행된다.
 ![스프링mvc구조](https://github.com/jonghunbaek/spring-mvc1-servlet/assets/107451991/22985373-e676-439c-95f5-b77969c99899)
-<img src="C:/Users/qor60/Desktop/BLOG/Github/00 Spring MVC/스프링mvc구조" width="500" height="250">
 
 ### 2. 핸들러 매핑과 핸들러 어댑터
 ##### 2.1 핸들러 매핑 
