@@ -13,3 +13,12 @@
 ##### 2.2 핸들러 어댑터
 + 핸들러 어댑터를 찾고 실행
 + 우선수위 - RequestMappingHandlerAdapter - HttpRequestHandlerAdapter - SimpleControllerHandlerAdapter(Controller인터페이스-과거에 사용)
+
+### 3. 뷰 리졸버
++ 우선순위 - BeanNameViewResolver(빈이름으로 뷰를 찾아 반환) - InternalResourceViewResolver(jsp를 처리할 수 있는 뷰를 반환)
++ 다른 뷰와 달리 jsp는 forward()를 통해 이동해야 렌더링이 된다. 
+
+### 4. 스프링 mvc
++ @RequestMapping - 요청 정보를 매핑
++ @Controller - 스프링MVC에서 애노테이션 기반 컨트롤러 인식, 컴포넌트 스캔 대상
++ RequestMappingHandlerMapping은 @RequestMapping, @Controller 둘중 하나가 있는 클래스를 빈에 등록
