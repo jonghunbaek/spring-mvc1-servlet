@@ -2,14 +2,16 @@
 ### 1. 요청 매핑
 + @PathVariable - 경로 변수(변수명 - 경로명 같으면 ""안 생략 가능), 다중 매핑으로 여러개 사용 가능
 + 요청 매핑의 여러가지 속성 - params, headers, consumes(요청 컨텐트 타입), produces(응답 컨텐트 타입) 
-+ public String headers(HttpServletRequest request, 
-						HttpServletResponse response, 
-					    HttpMethod httpMethod,
-						Locale locale,
-						@RequestHeader MultiValueMap<String, String> headerMap,
-						@RequestHeader ("host") String host,
-						@CookieValue(value ="myCookie", required = false) String cookie
-						) 
+```java
+  public String headers(HttpServletRequest request, 
+			HttpServletResponse response, 
+		    	HttpMethod httpMethod,
+			Locale locale,
+			@RequestHeader MultiValueMap<String, String> headerMap,
+			@RequestHeader ("host") String host,
+			@CookieValue(value ="myCookie", required = false) String cookie
+			)
+```
 + 위와 같이 헤더의 정보를 받을 수 있다.			
 
 
