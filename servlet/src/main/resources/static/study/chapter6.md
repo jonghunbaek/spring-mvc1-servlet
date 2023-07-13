@@ -1,5 +1,5 @@
 # 스프링MVC - 기본기능
-### 1. 요청 매핑
+### 1. 요청 매핑, 요청 파라미터
 + @PathVariable - 경로 변수(변수명 - 경로명 같으면 ""안 생략 가능), 다중 매핑으로 여러개 사용 가능
 + 요청 매핑의 여러가지 속성 - params, headers, consumes(요청 컨텐트 타입), produces(응답 컨텐트 타입) 
 ```java
@@ -12,8 +12,34 @@
 			@CookieValue(value ="myCookie", required = false) String cookie
 			)
 ```
-+ 위와 같이 헤더의 정보를 받을 수 있다.			
++ 위와 같이 헤더의 정보를 받을 수 있다.
++ @RequestParam("요청 파라미터") - 요청 파라미터를 간편하게 사용 가능, request.getParameter()와 같은 역할
++ 변수명과 요청 파라미터 명이 같으면 요청파라미터 생략가능 - @RequestParam 요것도 생략가능(단, 원시 타입과 래퍼 클래스, String만) 
++ required의 boolean 속성을 통해 파라미터의 값의 필수 상태를 조절할 수 있다.
++ defaultValue 속성을 통해 파라미터 값이 없을 경우 기본값을 지정해준다.(null, "" 둘다 처리가능)
++ Map, MultiValueMap을 통해서 파라미터를 받을 수 있다.
++ @ModelAttribute - 객체를 통해 파라미터를 받음, 단 필드에 있는 변수명과 파라미터 명이 일치해야한다.
++ 웃긴건 얘도 생략 가능함 -> 원시타입, 래퍼, String등의 기본 타입은 @RequestParam과 나머지는 @ModelAttriute와 연관되고 각자 생략가능
 
+### 2. 요청 메시지(Http Body Message)
+##### 2.1 단순 텍스트
++ 가장 기본적인 방식은 request.InputStream()으로 받을 수 있다. 좀 더 단순한 방식은 InputStream으로 직접 받기
++ HttpEntity를 통해 HttpMessageConverter를 실행하여 바이트 코드를 문자열로 받는다.
++ httpEntity.getBody()로 바디 메세지를 가져오고, HttpEntity<>("메시지 내용")으로 응답을 보낸다.
++ HttpEntity는 요청파라미터를 조회하는 기능과 전혀 관계가 없다.
++ ResponseEntity<>()는 http상태 코드를 넣어 반환할 수 있다.
++ 위에 기술한 모든 것들은 @RequestBody를 통해 해결할 수 있다.
+
+##### 2.2 JSON
++ HttpEntity로 받아도 된다. 하지만 아래가 더 편
++ @RequestBody로 받으면 된다. 굳이 json으로 parsing해주는 과정도 필요 없음
++ @RequestBody는 생략 불가능 - 생략하면 @RequestParam 또는 @ModelAttriute을 생략한 것으로 인식. 즉, 요청 파라미터로 인식
+
+### 3. Http 응답
+##### 3.1 정적리소스, 뷰 템플릿
++ 정적리소스는 static패키지 하위에 저장해서 url을 통해 접근 가능
++ spring boot는 templates 하위 경로에 뷰 템플릿 파일들을 저장해야 접근할 수 있다.
++ 뷰템플릿은 ModelAndView를 통해 접근할 수 있다. 또 문자열로 경로를 반환해 접근할 수도 있다.
 
 ### Tip
 + WAR vs JAR - jsp를 쓰지 않기때문에 jar, war는 별도의 톰캣 설치로 이용
@@ -26,7 +52,10 @@
 + 개발, 운영 환경등에 따라 로그 레벨을 다르게 설정해 반드시 필요한 로그만 출력되게 설정 가능
 + 또 콘솔뿐 아니라 파일, 네트워크 등 원하는 위치에 출력가능, 성능 자체도 일반 출력보다 좋음
 + MultiValueMap -> 하나의 키에 여러 값(쿼리스트링 받을 때 종종)
++ 프로퍼티란? - getter, setter에 주체가 되는 개체
++ stream은 무조건 bytecode이기 때문에 인코딩을 지정해줘야 한다.
++ objectMapper.readValue() 활용 방
 
 
 
-+ 151분 - 요청매핑-api예시
+  
