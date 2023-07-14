@@ -41,6 +41,24 @@
 + spring boot는 templates 하위 경로에 뷰 템플릿 파일들을 저장해야 접근할 수 있다.
 + 뷰템플릿은 ModelAndView를 통해 접근할 수 있다. 또 문자열로 경로를 반환해 접근할 수도 있다.
 
+##### 3.2 http api, 바디에 메세지 넣기
++ response.getWriter().write("ok")
++ ResponseEntity<>("ok", HttpStatus.OK)
++ @ResponseBody
++ @ResponseStatus를 통해 http응답 상태 코드를 보낼 수 있다. 단, 어노테이션이라 동적으로 설정이 불가하다.
++ 동적으로 응답하려면 ResponseEntity로
++ @RestController는 각 메소드에 @ResponseBody를 붙이는 것과 같은 기능
+
+### 4. HttpMessageConverter
++ http message body에 직접 읽거나 쓸 때는 HttpMessageConverter를 사용하는게 편리
++ @ResponseBody, @RequestBody, HttpEntity(Request,Response)를 사용할 때는 뷰리졸버대신 컨버터가 동작
++ 기본 문자처리(StringHttpMessageConverter), 기본 객체 처리(MappingJackson2HttpMessageConverter-json) 및 바이트 처리등 여러 컨버터가 있음
++ 응답의 경우 클라이언트의 HTTP Accept header와 서버의 반환타입을 조합해 적절한 컨버터가 선택된다.
++ 우선순위 : ByteArrayHttpMessageConverter - StringHttpMessageConverter - MappingJackson2HttpMessageConverter
+
+### 요청 매핑 핸들러 어댑터 구조
++ 
+
 ### Tip
 + WAR vs JAR - jsp를 쓰지 않기때문에 jar, war는 별도의 톰캣 설치로 이용
 + 로그라이브러리들을 인터페이스로 추상화한게 SLF4J - Logback은 구현체, @Slf4j로 간편하게 사용 가능
@@ -54,7 +72,8 @@
 + MultiValueMap -> 하나의 키에 여러 값(쿼리스트링 받을 때 종종)
 + 프로퍼티란? - getter, setter에 주체가 되는 개체
 + stream은 무조건 bytecode이기 때문에 인코딩을 지정해줘야 한다.
-+ objectMapper.readValue() 활용 방
++ objectMapper.readValue() 활용 방법
++ 요청, 응답 모두 메시지 바디에 컨텐트 타입을 지정해줘야 한다.
 
 
 
